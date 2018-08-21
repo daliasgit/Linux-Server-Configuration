@@ -83,7 +83,7 @@ To                         Action      From
 
 ### Log in to grader account by
 
-    `dalias-mbp:~ Dalia$ ssh grader@13.58.230.193 -p 2200 -i ~/.ssh/LinuxCourse`
+    `dalias-mbp:~ Dalia$ ssh grader@52.14.19.237 -p 2200 -i ~/.ssh/LinuxCourse`
 
 ### Configure the local timezone to UTC
    
