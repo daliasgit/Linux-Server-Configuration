@@ -91,8 +91,37 @@ To                         Action      From
 
 ### Install apache2 and libapache2-mod-wsgi modules
     
-    * Install Apache: `grader@ip-172-26-6-47:~$ sudo apt-get install apache2`
-    * Install mod_wsgi: `grader@ip-172-26-6-47:~$ sudo apt-get install libapache2-mod-wsgi`
-    * Restart Apache: `grader@ip-172-26-6-47:~$ sudo service apache2 restart`
+   1. Install Apache: `grader@ip-172-26-6-47:~$ sudo apt-get install apache2`
+   2. Install mod_wsgi: `grader@ip-172-26-6-47:~$ sudo apt-get install libapache2-mod-wsgi`
+   3. Restart Apache: `grader@ip-172-26-6-47:~$ sudo service apache2 restart`
+   * Now when you visit the IP address or URL you will see the default Apache start up page.
 
+### Install PostgreSQL
 
+   1. Install PostgreSQL: `grader@ip-172-26-6-47:~$ sudo apt-get install postgresql postgresql-contrib`
+
+   2. Login as superuser postgres
+
+      `grader@ip-172-26-6-47:~$ sudo su - postgres`
+  
+   3. Get into postgreSQL shell `psql`
+
+   4. Create a new database named catalog and create a new user named catalog in postgreSQL shell
+      
+      `postgres=# CREATE DATABASE catalog;`
+      `postgres=# CREATE USER catalog;`
+
+   5. Set a password for user catalog
+      
+      `postgres=# ALTER ROLE catalog WITH PASSWORD 'password';`
+
+   6. Give user "catalog" permission to "catalog" application database
+
+      `postgres=# GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog;`
+   
+   7. Quit postgreSQL `postgres=# \q`
+
+   8. Exit from user "postgres"
+
+      `postgres@ip-172-26-6-47:~$ exit`
+ 
