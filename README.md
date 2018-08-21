@@ -43,7 +43,7 @@ You can visit http:// for the website deployed.
    7. Check if firewall is enabled by `sudo ufw status`
 
   ``` ubuntu@ip-172-26-6-47:~$ sudo ufw status
-  
+
 Status: active
 
 To                         Action      From
@@ -63,21 +63,21 @@ To                         Action      From
 
 ### Generate SSH key pair for grader
    
-   3. `dalias-mbp:~ Dalia$ ssh-keygen`
+   * `dalias-mbp:~ Dalia$ ssh-keygen`
    Enter file in which to save the key (/Users/Dalia/.ssh/id_rsa): /Users/Dalia/.ssh/LinuxCourse
 
-   `ubuntu@ip-172-26-6-47:~$ su - grader`
-   `grader@ip-172-26-6-47:~$ mkdir .ssh`
-   `grader@ip-172-26-6-47:~$ touch .ssh/authorized_keys`
+   * `ubuntu@ip-172-26-6-47:~$ su - grader`
+   * `grader@ip-172-26-6-47:~$ mkdir .ssh`
+   * `grader@ip-172-26-6-47:~$ touch .ssh/authorized_keys`
 
-   `dalias-mbp:~ Dalia$ cat .ssh/LinuxCourse.pub`
+   * `dalias-mbp:~ Dalia$ cat .ssh/LinuxCourse.pub`
 
-   `grader@ip-172-26-6-47:~$ nano .ssh/authorized_keys` -> Add content -> control X -> y -> Enter
+   * `grader@ip-172-26-6-47:~$ nano .ssh/authorized_keys` -> Add content -> control X -> y -> Enter
 
 ### Set file permissions:
 
-   `grader@ip-172-26-6-47:~$ chmod 700 .ssh`
-   `grader@ip-172-26-6-47:~$ chmod  644 .ssh/authorized_keys`
+   * `grader@ip-172-26-6-47:~$ chmod 700 .ssh`
+   * `grader@ip-172-26-6-47:~$ chmod  644 .ssh/authorized_keys`
 
    Reload SSH using `sudo service ssh restart`
 
