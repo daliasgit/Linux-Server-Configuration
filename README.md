@@ -89,5 +89,10 @@ To                         Action      From
    
    `grader@ip-172-26-6-47:~$ sudo dpkg-reconfigure tzdata` -> None of these -> UTC
 
+### Install apache2 and libapache2-mod-wsgi modules
+    
+    * Install Apache: `grader@ip-172-26-6-47:~$ sudo apt-get install apache2`
+    * Install mod_wsgi: `grader@ip-172-26-6-47:~$ sudo apt-get install libapache2-mod-wsgi`
+    * Restart Apache: `grader@ip-172-26-6-47:~$ sudo service apache2 restart`
 
 
