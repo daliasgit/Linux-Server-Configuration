@@ -184,7 +184,9 @@ Since the app previously used sqlite, Change the engine inside the .py files(__i
    * `grader@ip-172-26-2-0:~$ cd /var/www`
    * `grader@ip-172-26-2-0:/var/www$ sudo git clone https://github.com/daliasgit/FlaskApp.git FlaskApp`
    * `grader@ip-172-26-2-0:/var/www$ ls`
+
      ```FlaskApp  html```
+     
    * `grader@ip-172-26-2-0:/var/www$ sudo chown -R www-data:www-data /var/www/FlaskApp`
    * `grader@ip-172-26-2-0:/var/www$ ls`
      
@@ -271,6 +273,11 @@ application.secret_key = 'super_secret_key'
 ### Log error:
    
    * 'grader@ip-172-26-2-0:~$  sudo tail -100 /var/log/apache2/error.log'
+
+
+### To delete a file:
+   
+   * `sudo rm -r <File name>` 
 
 
 ### Reference:
