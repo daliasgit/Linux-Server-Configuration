@@ -5,28 +5,28 @@ This is the fifth project for "Full Stack Web Developer Nanodegree" on Udacity.
 
 In this project, a Linux virtual machine needs to be configurated to support the Item Catalog website.
 
-You can visit http:// for the website deployed.
+You can visit http://ec2-18-188-48-42.us-east-2.compute.amazonaws.com for the website deployed.
 * Public IP Address: 52.14.19.237
 * Accessible SSH port: 2200
 * Passphress: grader
 
-* ssh grader@52.14.19.237 -p 2200 -i ~/.ssh/LinuxCourse
-* ssh -i ~/.ssh/LightsailDefaultPrivateKey-us-east-2.pem -p 2200 ubuntu@52.14.19.237
+* ssh grader@18.188.48.42 -p 2200 -i ~/.ssh/LinuxCourse
+* ssh -i ~/.ssh/LightsailDefaultPrivateKey-us-east-2.pem -p 2200 ubuntu@18.188.48.42
 
 ### Update all currently installed packages
 
-   1. `ubuntu@ip-172-26-6-47:~$ sudo apt-get update`
-   2. `ubuntu@ip-172-26-6-47:~$ sudo apt-get upgrade`
+   1. `ubuntu@ip-172-26-2-0:~$ sudo apt-get update`
+   2. `ubuntu@ip-172-26-2-0:~$ sudo apt-get upgrade`
    Package configuration-> keep the local version currently installed ->ok
 
 ### Change the SSH port from 22 to 2200
  
-   1. `ubuntu@ip-172-26-6-47:~$ sudo nano /etc/ssh/sshd_config` 
+   1. `ubuntu@ip-172-26-2-0:~$ sudo nano /etc/ssh/sshd_config` 
       Modify Port 22 to Port 2200
       `PermitRootLogin prohibit-password` to `PermitRootLogin no`
       `PasswordAuthentication no`
       control X -> y -> Enter
-   2. Restart the service `uubuntu@ip-172-26-6-47:~$ sudo service ssh restart`
+   2. Restart the service `uubuntu@ip-172-26-2-0:~$ sudo service ssh restart`
 
 
 ### Configure the Uncomplicated Firewall (UFW)
@@ -58,26 +58,26 @@ To                         Action      From
 
 ### Create a new user named grader  
    
-   1. `ubuntu@ip-172-26-6-47:~$ sudo adduser grader`
-   2. `ubuntu@ip-172-26-6-47:~$ sudo nano /etc/sudoers.d/grader` Add-> grader ALL=(ALL:ALL) ALL ->control X -> Y -> Enter
+   1. `ubuntu@ip-172-26-2-0:~$ sudo adduser grader`
+   2. `ubuntu@ip-172-26-2-0:~$ sudo nano /etc/sudoers.d/grader` Add-> grader ALL=(ALL:ALL) ALL ->control X -> Y -> Enter
 
 ### Generate SSH key pair for grader
    
    * `dalias-mbp:~ Dalia$ ssh-keygen`
    Enter file in which to save the key (/Users/Dalia/.ssh/id_rsa): /Users/Dalia/.ssh/LinuxCourse
 
-   * `ubuntu@ip-172-26-6-47:~$ su - grader`
-   * `grader@ip-172-26-6-47:~$ mkdir .ssh`
-   * `grader@ip-172-26-6-47:~$ touch .ssh/authorized_keys`
+   * `ubuntu@ip-172-26-2-0:~$ su - grader`
+   * `grader@ip-172-26-2-0:~$ mkdir .ssh`
+   * `grader@ip-172-26-2-0:~$ touch .ssh/authorized_keys`
 
    * `dalias-mbp:~ Dalia$ cat .ssh/LinuxCourse.pub`
 
-   * `grader@ip-172-26-6-47:~$ nano .ssh/authorized_keys` -> Add content -> control X -> y -> Enter
+   * `grader@ip-172-26-2-0:~$ nano .ssh/authorized_keys` -> Add content -> control X -> y -> Enter
 
 ### Set file permissions:
 
-   * `grader@ip-172-26-6-47:~$ chmod 700 .ssh`
-   * `grader@ip-172-26-6-47:~$ chmod  644 .ssh/authorized_keys`
+   * `grader@ip-172-26-2-0:~$ chmod 700 .ssh`
+   * `grader@ip-172-26-2-0:~$ chmod  644 .ssh/authorized_keys`
 
    Reload SSH using `sudo service ssh restart`
 
@@ -87,22 +87,22 @@ To                         Action      From
 
 ### Configure the local timezone to UTC
    
-   `grader@ip-172-26-6-47:~$ sudo dpkg-reconfigure tzdata` -> None of these -> UTC
+   `grader@ip-172-26-2-07:~$ sudo dpkg-reconfigure tzdata` -> None of these -> UTC
 
 ### Install apache2 and libapache2-mod-wsgi modules
     
-   1. Install Apache: `grader@ip-172-26-6-47:~$ sudo apt-get install apache2`
-   2. Install mod_wsgi: `grader@ip-172-26-6-47:~$ sudo apt-get install libapache2-mod-wsgi`
-   3. Restart Apache: `grader@ip-172-26-6-47:~$ sudo service apache2 restart`
+   1. Install Apache: `grader@ip-172-26-2-0:~$ sudo apt-get install apache2`
+   2. Install mod_wsgi: `grader@ip-172-26-2-0:~$ sudo apt-get install libapache2-mod-wsgi`
+   3. Restart Apache: `grader@ip-172-26-2-0:~$ sudo service apache2 restart`
    * Now when you visit the IP address or URL you will see the default Apache start up page.
 
 ### Install PostgreSQL
 
-   1. Install PostgreSQL: `grader@ip-172-26-6-47:~$ sudo apt-get install postgresql postgresql-contrib`
+   1. Install PostgreSQL: `grader@ip-172-26-2-0:~$ sudo apt-get install postgresql postgresql-contrib`
 
    2. Login as superuser postgres
 
-      `grader@ip-172-26-6-47:~$ sudo su - postgres`
+      `grader@ip-172-26-2-0:~$ sudo su - postgres`
   
    3. Get into postgreSQL shell `psql`
 
@@ -123,5 +123,100 @@ To                         Action      From
 
    8. Exit from user "postgres"
 
-      `postgres@ip-172-26-6-47:~$ exit`
- 
+      `postgres@ip-172-26-2-0:~$ exit`
+
+### 14.3 Obtain hostname and enable google, facebook credentials
+    We will need the hostname to ease authentication with google and facebook. The host name can be obtained from the IP address using `nslookup`:
+```
+grader@ip-172-26-2-0:~$ nslookup 18.188.48.42
+Server:		172.26.0.2
+Address:	172.26.0.2#53
+
+Non-authoritative answer:
+42.48.188.18.in-addr.arpa	name = ec2-18-188-48-42.us-east-2.compute.amazonaws.com.
+
+Authoritative answers can be found from:
+```
+
+### Add Application From Github:
+
+    `grader@ip-172-26-2-0:~$ sudo apt-get install git`
+    `grader@ip-172-26-2-0:~$ cd /var/www`
+    `grader@ip-172-26-2-0:/var/www$ sudo git clone https://github.com/daliasgit/FlaskApp.git FlaskApp`
+    `grader@ip-172-26-2-0:/var/www$ ls`
+     ```FlaskApp  html```
+    `grader@ip-172-26-2-0:/var/www$ sudo chown -R www-data:www-data /var/www/FlaskApp`
+    `grader@ip-172-26-2-0:/var/www$ ls`
+     ```FlaskApp  html```
+     `grader@ip-172-26-2-0:/var/www$ sudo chmod 755 -R /var/www/FlaskApp`
+    `grader@ip-172-26-2-0:/var/www$ ls -al`
+    ```total 16
+drwxr-xr-x  4 root     root     4096 Sep  8 15:34 .
+drwxr-xr-x 14 root     root     4096 Sep  8 15:18 ..
+drwxr-xr-x  4 www-data www-data 4096 Sep  8 15:34 FlaskApp
+drwxr-xr-x  2 root     root     4096 Sep  8 15:18 html```
+    
+    `grader@ip-172-26-2-0:/var/www$ cd FlaskApp`
+    `grader@ip-172-26-2-0:/var/www/FlaskApp$ ls`
+      ```catalog  README.md```
+    `grader@ip-172-26-2-0:/var/www/FlaskApp$ cd catalog`
+    `grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ ls`
+
+    ```client_secrets.json     __init__.py                 static
+database_setup.py       lotsofmenus.py              templates
+database_setup.pyc      __pycache__
+fb_client_secrets.json  restaurantmenuwithusers.db```
+
+    `grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo apt-get install python-pip`
+    `grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo -H pip install virtualenv `
+    `grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo virtualenv venv`
+    `grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ source venv/bin/activate`
+    `(venv) grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo -H pip install Flask`
+    `(venv) grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo -H pip install httplib2 oauth2client sqlalchemy psycopg2 sqlalchemy_utils requests`
+    `(venv) grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo nano catalog.wsgi`
+```
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/FlaskApp")
+
+from catalog import app as application
+application.secret_key = 'super_secret_key' 
+```
+
+    `grader@ip-172-26-2-0:~$ cd /etc/apache2/sites-available/`
+    `grader@ip-172-26-2-0:/etc/apache2/sites-available$ ls`
+    ```000-default.conf  default-ssl.conf```
+    `grader@ip-172-26-2-0:/etc/apache2/sites-available$ sudo nano FlaskApp.conf`
+```
+    <VirtualHost *:80>
+                ServerName 18.188.48.42
+                ServerAdmin ubuntu@18.188.48.42
+                WSGIScriptAlias / /var/www/FlaskApp/catalog/catalog.wsgi
+                <Directory /var/www/FlaskApp/catalog>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                Alias /static /var/www/FlaskApp/catalog/static
+                <Directory /var/www/FlaskApp/catalog/static/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+```
+
+
+
+    `(venv) grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo a2dissite 000-default.conf`
+    `(venv) grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo a2ensite FlaskApp.conf`
+    `(venv) grader@ip-172-26-2-0:/var/www/FlaskApp/catalog$ sudo servie apache2 restart`
+### Log error:
+   'grader@ip-172-26-2-0:~$  sudo tail -100 /var/log/apache2/error.log'
+
+### Reference:
+   1. [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1604)
